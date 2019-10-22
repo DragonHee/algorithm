@@ -6,44 +6,46 @@ import java.util.StringTokenizer;
 public class Backjoon1520 {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+    private static int[][] arr;
+    private static int[][] dp;
+    private static final byte[] X_ARR = {-1, 0, 1, 0};
+    private static final byte[] Y_ARR = {0, 1, 0, -1};
+    private static int m;
+    private static int n;
     public static void main(String[] args) throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int m = Integer.parseInt(st.nextToken());
-        int n = Integer.parseInt(st.nextToken());
-        int[][] arr = new int[m + 1][n + 1];
-        int[][] dp = new int[m + 1][n + 1];
+        m = Integer.parseInt(st.nextToken());
+        n = Integer.parseInt(st.nextToken());
+        arr = new int[m + 1][n + 1];
+        dp = new int[m + 1][n + 1];
+
         // 입력 값을 배열에 초기화한다.
         for(int i = 1; i <= m; i++){
             st = new StringTokenizer(br.readLine(), " ");
             for(int j = 1; j <= n; j++){
                 arr[i][j] = Integer.parseInt(st.nextToken());
+                dp[i][j] = -1;
             }
         }
-        dp[1][1] = 1;
-        for(int i = 2; i <= m ; i++) {
-            dp[i][1] = arr[i - 1][1] > arr[i][1] ? 1 : 0;
-        }
-        for(int i = 2; i <= n ; i++) {
-            dp[1][i] = arr[1][i - 1] > arr[1][i] ? 1 : 0;
-        }
-
-        for(int i = 2; i <= m; i++){
-            for(int j = 2; j <= n; j++){
-                dp[i][j] = (arr[i - 1][j] > arr[i][j] ? dp[i - 1][j] : 0)
-                        + (arr[i][j - 1] > arr[i][j] ? dp[i][j - 1] : 0);
-                if(arr[i - 1][j] < arr[i][j]) dp[i - 1][j] += dp[i][j];
-                if(arr[i][j - 1] < arr[i][j]) dp[i][j - 1] += dp[i][j];
-            }
-        }
-        for(int i = 1; i <= m; i++){
-            for(int j = 1; j <= n; j++){
-                bw.write(dp[i][j] + " ");
-            }
-            bw.write("\n");
-        }
-        bw.write(dp[m][n] + "\n");
+        bw.write(dfs(1,1) + "\n");
         bw.close();
         br.close();
+    }
+    public static int dfs(int x, int y){
+        if(x == m && y == n) return 1;
+
+        if(dp[x][y] == -1){
+            dp[x][y] = 0;
+            for(int i = 0; i < 4; i++){
+                if(isAvail(x + X_ARR[i], y + Y_ARR[i]) && (arr[x][y] > arr[x + X_ARR[i]][y + Y_ARR[i]]))
+                    dp[x][y] += dfs(x + X_ARR[i], y + Y_ARR[i]);
+            }
+        }
+        return dp[x][y];
+
+    }
+    public static boolean isAvail(int x, int y){
+        if(x < 1 || y < 1 || x > m || y > n) return false;
+        return true;
     }
 }
