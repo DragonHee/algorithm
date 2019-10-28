@@ -21,6 +21,7 @@ public class Backjoon9375 {
             }
             Arrays.sort(arr);
 
+
             int ans = 1;
             int count = 2;
 
