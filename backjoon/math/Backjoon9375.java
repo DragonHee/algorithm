@@ -16,6 +16,8 @@ public class Backjoon9375 {
             arr = new String[n];
 
             for(int j = 0 ; j < n; j++){
+
+
                 input = br.readLine();
                 arr[j] = input.substring(input.indexOf(" ") + 1);
             }
