@@ -8,16 +8,9 @@ public class Backjoon1676 {
 
     public static void main(String[] args) throws IOException {
         int n = Integer.parseInt(br.readLine());
-        int curVal;
         int count = 0;
 
-        for(int i = 1; i <= n; i++){
-            curVal = i;
-            while(curVal % 5 == 0){
-                curVal = curVal / 5;
-                count++;
-            }
-        }
+        for(int i = 5; i <= n; i *= 5) count += n / i;
 
         bw.write(count + "\n");
         bw.close();
