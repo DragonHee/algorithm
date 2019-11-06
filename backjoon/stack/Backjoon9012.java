@@ -19,18 +19,16 @@ public class Backjoon9012 {
         br.close();
     }
     public static boolean isVPS(String input) throws IOException {
-        Stack<Integer> openStack = new Stack<>();
-        Stack<Integer> closeStack = new Stack<>();
+        Stack<Integer> stack = new Stack<>();
 
         for(int i = 0 ; i < input.length(); i++){
-            if(input.charAt(i) == '(') openStack.push(i);
-            else closeStack.push(i);
+            if(input.charAt(i) == '(') stack.push(i);
+            else {
+                if(!stack.isEmpty()) stack.pop();
+                else return false;
+            }
         }
-
-        if(openStack.size() != closeStack.size()) return false;
-        while(true){
-            if(openStack.isEmpty()) return true;
-            else if(openStack.pop() > closeStack.pop()) return false;
-        }
+        if(stack.size() != 0) return false;
+        return true;
     }
 }
