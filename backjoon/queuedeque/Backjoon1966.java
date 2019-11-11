@@ -48,6 +48,7 @@ public class Backjoon1966 {
                     if(index == 0) break;
                 }else {
                     int priority = queue.poll();
+                    queue.add(priority);
                     pList.remove(0);
                     pList.add(priority);
                 }
@@ -60,3 +61,42 @@ public class Backjoon1966 {
         br.close();
     }
 }
+
+//import java.io.*;
+//        import java.util.*;
+//
+//public class Main {
+//    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//    static StringTokenizer stk;
+//    public static void main(String[] args) throws Exception {
+//        int T = Integer.parseInt(br.readLine());
+//        while (T-- > 0) {
+//            stk = new StringTokenizer(br.readLine());
+//            int N = Integer.parseInt(stk.nextToken());
+//            int M = Integer.parseInt(stk.nextToken());
+//            int[] print = new int[N];
+//            int[] priority = new int[10];
+//            stk = new StringTokenizer(br.readLine());
+//            for (int i = 0; i < N; i++) {
+//                print[i] = Integer.parseInt(stk.nextToken());
+//                priority[print[i]]++;
+//            }
+//
+//            int count = 0;
+//            int highest = 9;
+//            for (int i = 0; print[M] != 0; i = (++i) % N) {
+//                for (int h = highest; priority[highest] == 0; h--)
+//                    highest = h;
+//                if (print[i] == highest) {
+//                    priority[highest]--;
+//                    print[i] = 0;
+//                    count++;
+//                }
+//            }
+//            bw.write(count + "\n");
+//        }
+//        bw.flush();
+//    }
+//
+//}
