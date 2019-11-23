@@ -17,6 +17,8 @@ public class Backjoon11401 {
         bw.write(ans + "\n");
         bw.close();
         br.close();
+
+
     }
     public static long solve(int n, int k){
         return 1;
