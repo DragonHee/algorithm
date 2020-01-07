@@ -1,26 +1,50 @@
 package backjoon.divideandconquer;
 
-import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Backjoon11401 {
-    static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+public class Backjoon11401
+{
+    static final int MOD = 1000000007;
 
-    public static void main(String[] args) throws IOException {
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-        int n = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
-
-        long ans = solve(n, k);
-        bw.write(ans + "\n");
-        bw.close();
-        br.close();
-
-
+    // fac 구하기
+    static long fac(long n)
+    {
+        long ret = 1;
+        while (n > 1)
+        {
+            ret = (ret * n) % MOD;
+            n--;
+        }
+        return ret;
     }
-    public static long solve(int n, int k){
-        return 1;
+
+    static long pow(long a, int b) {
+
+        long ret= 1;
+        long aa = a;
+
+        while (b > 0) {
+
+            if (b%2 == 1) ret = ret * aa  % MOD;
+            b = b/2;
+            aa = (aa * aa) % MOD;
+        }
+
+        return ret;
+    }
+
+    public static void main(String[] args) throws Exception
+    {
+        Scanner in = new Scanner(System.in);
+        long n = in.nextInt();
+        long k = in.nextInt();
+
+        long a = fac(n);
+        long b = fac(n - k) * fac(k) % MOD;
+        long result = a * pow(b, MOD-2) % MOD;
+
+        System.out.println(result);
+
     }
 }
+
