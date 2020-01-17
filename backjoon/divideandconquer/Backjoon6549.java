@@ -38,6 +38,8 @@ class SegmentTree{
         if(leftMinIndex == Integer.MAX_VALUE) return rightMinIndex;
         else if(rightMinIndex == Integer.MAX_VALUE) return leftMinIndex;
         else return arr[leftMinIndex] < arr[rightMinIndex] ? leftMinIndex : rightMinIndex;
+
+
     }
 
     public long getMaxWidth(int left, int right){
