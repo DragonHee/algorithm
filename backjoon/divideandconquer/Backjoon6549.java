@@ -51,19 +51,16 @@ public class Backjoon6549 {
             for(int i = 0 ; i < n; i++){
                 int idx = i;
 
-                while(!stack.isEmpty() && arr[i] <= arr[stack.peek().getIdx()]){
-                    long tempArea = stack.peek().height * (i - stack.peek().getIdx());
-                    area = Math.max(tempArea, area);
+                while(!stack.isEmpty() && arr[i] <= stack.peek().getHeight()){
+                    area = Math.max(stack.peek().height * (i - stack.peek().getIdx()), area);
                     idx = stack.peek().getIdx();
                     stack.pop();
-                    System.out.println(area);
                 }
-                stack.push(new Info(i, arr[i]));
+                stack.push(new Info(idx, arr[i]));
             }
 
             while(!stack.isEmpty()){
-                long tempArea = stack.peek().height * (n - stack.peek().getIdx());
-                area = Math.max(tempArea, area);
+                area = Math.max(stack.peek().height * (n - stack.peek().getIdx()), area);
                 stack.pop();
             }
 
