@@ -12,7 +12,7 @@ public class Backjoon2110 {
     public static void main(String[] args) throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int n = Integer.parseInt(st.nextToken());
-        int c = Integer.parseInt(st.nextToken()) - 1;
+        int c = Integer.parseInt(st.nextToken());
         int ans = -1;
         int[] locationArr = new int[n];
 
@@ -25,20 +25,16 @@ public class Backjoon2110 {
         int max = locationArr[n - 1] - locationArr[0];
 
         while(min <= max) {
-            int count = 0;
-            int iPlus = 1;
+            int count = 1;
+            int start = locationArr[0];
             int mid = (min + max) >> 1;
+            int d;
 
-            for (int i = 0; i < n; i++) {
-                if(i + iPlus >= n) break;
-                if(locationArr[i + iPlus] - locationArr[i] >= mid){
-                    i += iPlus - 1;
-                    iPlus = 1;
+            for (int i = 1; i < n; i++) {
+                d = locationArr[i] - start;
+                if(d >= mid){
                     count++;
-
-                }else{
-                    iPlus++;
-                    i--;
+                    start = locationArr[i];
                 }
             }
 
