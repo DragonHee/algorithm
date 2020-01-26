@@ -5,22 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-class MyQueue{
-    List<Integer> list = new ArrayList<>();
-
-    public void add(int num){
-        int left = 0;
-        int right = list.size() - 1;
-
-        while (left <= right){
-            int mid = (left + right) >> 1;
-            if(list.get(mid) >= num)
-                right = mid - 1;
-            else left = mid + 1;
-        }
-        list.add(left, num);
-    }
-}
 public class Backjoon1655 {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -28,11 +12,23 @@ public class Backjoon1655 {
         int n = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
 
-        MyQueue queue = new MyQueue();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
+
         for(int i = 0 ; i < n; i++){
             int num = Integer.parseInt(br.readLine());
-            queue.add(num);
-            sb.append(queue.list.get(i / 2) + "\n");
+
+            if(minHeap.size() == maxHeap.size()) maxHeap.offer(num);
+            else minHeap.offer(num);
+
+            if(!minHeap.isEmpty() && !maxHeap.isEmpty())
+                if(minHeap.peek() < maxHeap.peek()){
+                    int tmp = minHeap.poll();
+                    minHeap.offer(maxHeap.poll());
+                    maxHeap.offer(tmp);
+                }
+
+            sb.append(maxHeap.peek() + "\n");
         }
         System.out.println(sb);
     }
