@@ -13,7 +13,7 @@ class Point{
 }
 public class Backjoon7576 {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static int arr[][], isTomato[][], m, n;
+    static int arr[][], m, n;
     static Queue<Point> queue = new LinkedList<>();
     // 상하좌우를 나타내기 위한 배열
     static int xArr[] = {-1, 0, 1, 0}, yArr[] = {0, 1, 0, -1};
@@ -24,7 +24,6 @@ public class Backjoon7576 {
         m = Integer.parseInt(st.nextToken());
         n = Integer.parseInt(st.nextToken());
         arr = new int[n + 1][m + 1];
-        isTomato = new int[n + 1][m + 1];
 
         for(int i = 1; i <= n; i++){
             st = new StringTokenizer(br.readLine());
