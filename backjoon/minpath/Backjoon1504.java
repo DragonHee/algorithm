@@ -21,7 +21,7 @@ public class Backjoon1504 {
     private static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     private static final int INF = 200_000_000;
     static List<Point> list[];
-    static int arr[][], dist[];
+    static int dist[];
     static boolean check[];
     static int n, v;
 
