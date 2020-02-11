@@ -3,39 +3,41 @@ package backjoon.minpath;
 import java.io.*;
 import java.util.*;
 
-public class Backjoon10217{
-    static class AirPlane implements Comparable<AirPlane>{
-        int end;
-        int cost;
-        int time;
+class AirPlane implements Comparable<AirPlane>{
+    int end;
+    int cost;
+    int time;
 
-        public AirPlane(int end, int cost, int time){
-            this.end = end;
-            this.cost = cost;
-            this.time = time;
-        }
-
-        @Override
-        public int compareTo(AirPlane airPlane) {
-            if(this.time == airPlane.time) return cost - airPlane.cost;
-            return this.time - airPlane.time;
-        }
+    public AirPlane(int end, int cost, int time){
+        this.end = end;
+        this.cost = cost;
+        this.time = time;
     }
 
+    @Override
+    public int compareTo(AirPlane airPlane) {
+        if(this.time == airPlane.time) return cost - airPlane.cost;
+        return this.time - airPlane.time;
+    }
+}
+
+public class Backjoon10217{
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    private static final int INF = 100 * 1_000;
+    private static final int INF = 100 * 10_000;
+
     static int n, m, k;
     static List<AirPlane> list[];
+    // dp[i][j] = k -> i번 노드까지 j비용 사용시  최소 비행 시간
     static int dp[][];
 
     public static void main(String[] args) throws IOException {
         int t = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
 
-        for(int i = 0 ; i < t; i++){
+        while(t-- > 0){
             init();
-            int result = dijkstra();
+            int result = dijkstra(1);
             sb.append(result == INF ? "Poor KCM\n" : result + "\n");
         }
 
@@ -44,47 +46,42 @@ public class Backjoon10217{
         br.close();
     }
 
-    private static int dijkstra() {
-        for(int i = 1 ; i < dp.length; i++)
-            Arrays.fill(dp[i], INF);
-
+    private static int dijkstra(int start) {
+       int result = INF;
 
        PriorityQueue<AirPlane> queue = new PriorityQueue<>();
-       queue.add(new AirPlane(1, 0, 0));
-       // 1번 노드까지 가는데 0 비용으로 갔을 때의 최소 시간
-       dp[1][0] = 0;
+       queue.add(new AirPlane(start, 0, 0));
+       // start번 노드까지 가는데 0 비용으로 갔을 때의 최소 시간
+       dp[start][0] = 0;
 
        while(!queue.isEmpty()){
            AirPlane airPlane = queue.poll();
            int node = airPlane.end;
            int cost = airPlane.cost;
-           int time = airPlane.time;
 
-           if(node == n) break;
-           if(dp[node][cost] < time) continue;
-           dp[node][cost] = time;
-
-           for(int i = 0 ; i < list[node].size(); i++){
-               AirPlane toAirplane = list[node].get(i);
+           // node번에서 출발하는 그래프에 대한 반복문
+           for(AirPlane toAirplane : list[node]){
                int toNode = toAirplane.end;
                int toCost = cost + toAirplane.cost;
-               int toTime = time + toAirplane.time;
+               int toTime = dp[node][cost] + toAirplane.time;
 
+               // 주어진 비용보다 크면 확인할 필요가 없다.
                if(toCost > m) continue;
-               if(dp[toNode][toCost] > toTime){
-                   for(int j = toCost; j <= m; j++){
-                       if(dp[toNode][j] > toTime) dp[toNode][j] = toTime;
-                   }
-                   queue.add(new AirPlane(toNode, toCost, toTime));
+               // 현재 구한 최소값보다 큰 경우 필요가 없다.
+               if(toTime > result) continue;
+               // 마지막 노드를 추가하는 경우
+               if(toNode == n){
+                   // 최소값을 저장한다.
+                   result = toTime;
+                   continue;
+               }
+               if(dp[toNode][toCost] > toTime) {
+                   if (dp[toNode][toCost] == INF)
+                       queue.add(new AirPlane(toNode, toCost, toTime));
+                   dp[toNode][toCost] = toTime;
                }
            }
        }
-
-       int result = Integer.MAX_VALUE;
-
-       for(int i = 1; i <= m; i++)
-           result = Math.min(result, dp[n][i]);
-
 
        return result;
     }
@@ -98,13 +95,12 @@ public class Backjoon10217{
         dp = new int[n + 1][m + 1];
         list = new ArrayList[n + 1];
 
-        for(int i = 0 ; i <= n; i++)
-            Arrays.fill(dp[i], INF);
-
-        for(int i = 0; i <= n; i++)
+        for(int i = 0 ; i <= n; i++) {
             list[i] = new ArrayList<>();
+            Arrays.fill(dp[i], INF);
+        }
 
-        for(int i = 0 ; i < k; i++){
+        while(k-- > 0){
             st = new StringTokenizer(br.readLine());
 
             int start = Integer.parseInt(st.nextToken());
@@ -116,3 +112,4 @@ public class Backjoon10217{
         }
     }
 }
+
