@@ -1,7 +1,6 @@
 package backjoon.dynamic;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 // 비트 마스크 문제
