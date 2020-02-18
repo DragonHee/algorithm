@@ -12,6 +12,7 @@ public class Backjoon14003 {
     static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
+
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
         List<Integer> list = new ArrayList<>();
