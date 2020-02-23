@@ -10,6 +10,7 @@ public class Backjoon9251 {
         String str1 = br.readLine();
         String str2 = br.readLine();
 
+
         int[][] lcmArr = new int[str1.length() + 1][str2.length() + 1];
         int answer = 0;
 
