@@ -8,6 +8,7 @@ public class Backjoon9251 {
 
     public static void main(String[] args) throws IOException {
         String str1 = br.readLine();
+
         String str2 = br.readLine();
 
 
