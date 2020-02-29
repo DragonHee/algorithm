@@ -8,6 +8,7 @@ import java.util.Stack;
 // 사실 lcm알고리즘을 모르고 있다면
 // 생각해서 풀기 힘들기 때문에
 // 숙지하고 있도록 하자.
+
 public class Backjoon9252 {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
