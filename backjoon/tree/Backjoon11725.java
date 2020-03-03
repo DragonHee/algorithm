@@ -15,6 +15,7 @@ public class Backjoon11725 {
         boolean check[] = new boolean[INF + 1];
         int parent[] = new int[INF + 1];
 
+
         check[1] = true;
         parent[1] = 1;
 
