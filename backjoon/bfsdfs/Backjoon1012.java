@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+
 public class Backjoon1012 {
     static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static boolean arr[][];
