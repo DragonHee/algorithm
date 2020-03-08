@@ -53,6 +53,7 @@ public class Backjoon11725 {
 
         for(int i = 2; i <= N; i++) sb.append(parent[i] + "\n");
 
+
         bw.write(sb.toString());
         bw.close();
         br.close();
