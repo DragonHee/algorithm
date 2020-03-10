@@ -12,6 +12,7 @@ public class Backjoon10818 {
         int num;
         int max = -1000000, min = 1000000;
 
+
         N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
