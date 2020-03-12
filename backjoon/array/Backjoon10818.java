@@ -20,6 +20,7 @@ public class Backjoon10818 {
             num = Integer.parseInt(st.nextToken());
             if(num >= max) max = num;
             if(num <= min) min = num;
+
         }
 
         System.out.println(min + " " + max);
