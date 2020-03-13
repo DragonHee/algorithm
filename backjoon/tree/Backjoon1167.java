@@ -38,6 +38,8 @@ public class Backjoon1167 {
 
                 listArr[start].add(new Node(end, distance));
                 listArr[end].add(new Node(start, distance));
+
+
             }
         }
     }
