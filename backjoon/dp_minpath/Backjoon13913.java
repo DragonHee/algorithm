@@ -16,6 +16,8 @@ public class Backjoon13913 {
         int K = Integer.parseInt(st.nextToken());
 
         // 방문 여부와 동시에 최단거리를 저장하는 배열
+        // 값이 0인 경우 미방문, 값이 0이 아니라면 방문을 의미한다.
+        // 값이 0이 아닌 경우 최단거리의 값을 나타낸다.
         visited = new int[INF + 1];
         // 부모 노드를 저장하는 배열
         parent = new int[INF + 1];
@@ -24,6 +26,7 @@ public class Backjoon13913 {
         queue.add(N);
         visited[N] = 1;
 
+        // 후에 경로 탐색에 사용될 stack 자료구조
         Stack<Integer> path = new Stack<>();
 
         while(true){
@@ -56,7 +59,8 @@ public class Backjoon13913 {
                 parent[cur * 2] = cur;
             }
 
-
+            // 동생의 위치의 최단거리 값이 0이 아닌경우
+            // 동생의 위치에 도달했다고 판단한다.
             if(visited[K] != 0) {
                 int cur_idx = K;
 
@@ -72,8 +76,8 @@ public class Backjoon13913 {
             }
         }
 
-        // 시작점을 1로 지정했으므로 - 1 한 값을 결과로
-        // 출력한다(정확히는 출력 버퍼에 추가한다)
+        // 시작점의 최단거리를 1로 지정했으므로
+        // - 1 한 값을 결과로 출력한다(정확히는 출력 버퍼에 추가한다)
         bw.write(visited[K] - 1 + "\n");
 
         // 스택에서 빼며 경로를 출력한다
@@ -86,7 +90,7 @@ public class Backjoon13913 {
     }
 
     public static boolean checkLocation(int location){
-        // 찾으려는 범위가 0 미만, 100_000 이상인 경우 false 반환
+        // 찾으려는 범위가 0 미만, 100_000 초과인 경우 false 반환
         if(location < 0 || location > INF) return false;
         // 이미 방문한 경우 false 반환
         if(visited[location] != 0) return false;
