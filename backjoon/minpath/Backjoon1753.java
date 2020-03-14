@@ -19,7 +19,8 @@ class Node implements Comparable<Node>{
 public class Backjoon1753 {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    private static final int INF = 100_000_000;
+    // 최대 노드 수 * 최대 가중치
+    private static final int INF = 20_000 * 10;
     static int v,e,k;
     static List<Node>[] list;
     static int[] dist;
