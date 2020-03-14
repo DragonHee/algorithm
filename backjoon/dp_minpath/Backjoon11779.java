@@ -20,6 +20,8 @@ class Bus implements Comparable<Bus>{
 public class Backjoon11779 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    // 최단거리의 최댓 값
+    // 최대 노드 수 * 버스 최대 비용
     static int INF = 1_000 * 100_000;
     static ArrayList<Bus> busList[];
     static int dist[];
@@ -35,10 +37,12 @@ public class Backjoon11779 {
 
         busList = new ArrayList[n + 1];
 
+        // 인접리스트 초기화
         for(int i = 1 ; i <= n; i++){
             busList[i] = new ArrayList<>();
         }
 
+        // 인접리스트 초기화
         for(int i = 0 ; i < m; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -54,10 +58,13 @@ public class Backjoon11779 {
         start = Integer.parseInt(st.nextToken());
         end = Integer.parseInt(st.nextToken());
 
+        // 최단경로를 저장한다.
         dist = new int[n + 1];
+        // 경로 추적을 위한 부모노드 정보를 저장한다.
         parent = new int[n + 1];
         Arrays.fill(dist, INF);
 
+        // 다익스트라를 이용하여 최단거리를 구한다.
         dijkstra();
         Stack<Integer> stack = searchPath();
 
@@ -101,7 +108,6 @@ public class Backjoon11779 {
 
     public static Stack<Integer> searchPath(){
         Stack<Integer> stack = new Stack<>();
-
         int cur = end;
 
         while(cur != start) {
