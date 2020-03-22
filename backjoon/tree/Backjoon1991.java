@@ -50,6 +50,7 @@ public class Backjoon1991 {
 
 
 
+
         while(!stack.isEmpty()){
             Node node = stack.pop();
 
