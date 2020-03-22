@@ -48,9 +48,6 @@ public class Backjoon1991 {
 
         stack.push(arr[0]);
 
-
-
-
         while(!stack.isEmpty()){
             Node node = stack.pop();
 
