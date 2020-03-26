@@ -54,6 +54,7 @@ public class Backjoon1991 {
         while(!stack.isEmpty()){
             Node node = stack.pop();
 
+
             stackAns.add(node.parent);
             if(node.rightChild >= 0) stack.push(arr[node.rightChild]);
             if(node.leftChild >= 0) stack.push(arr[node.leftChild]);
