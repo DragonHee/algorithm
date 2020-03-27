@@ -57,6 +57,7 @@ public class Backjoon1991 {
 
             stackAns.add(node.parent);
             if(node.rightChild >= 0) stack.push(arr[node.rightChild]);
+
             if(node.leftChild >= 0) stack.push(arr[node.leftChild]);
         }
 
