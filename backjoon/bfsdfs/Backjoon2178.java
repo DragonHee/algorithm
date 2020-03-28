@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-// row, col 인덱스를 저장하는 클래스
+// row, col 인덱스를 저장하는 클래스 
 class Location{
     int row, col;
     public Location(int row, int col) {this.row = row; this.col = col;}
