@@ -64,6 +64,8 @@ public class Backjoon1991 {
 
         while (!stackAns.isEmpty()){
             sb.append((char)(stackAns.poll() + 'A'));
+
+
         }
 
         stack.push(arr[0]);
