@@ -5,61 +5,69 @@ import java.io.*;
 public class Backjoon2751 {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    private static int[] arr;
     private static int[] sortedArr;
+    static int N;
     public static void main(String[] args) throws IOException {
-        int n = Integer.parseInt(br.readLine());
-        int []arr = new int[n];
-        sortedArr = new int[n];
-        int i, j;
+        N = Integer.parseInt(br.readLine());
 
-        for(i = 0 ; i < n; i++){
+        arr = new int[N];
+        sortedArr = new int[N];
+
+        for(int i = 0; i < N; i++){
             arr[i] = Integer.parseInt(br.readLine());
         }
 
-        mergeSort(arr, 0, n - 1);
-        for(i = 0 ; i < n; i++){
-            System.out.println(arr[i]);
+        mergeSort(0, N - 1);
+
+        for(int i = 0 ; i < N; i++){
+            bw.write(arr[i] + "\n");
+        }
+
+        bw.close();
+        br.close();
+    }
+
+    public static void mergeSort(int low, int high){
+        if(low < high){
+            int mid = low + (high - low) / 2;
+
+            mergeSort(low, mid);
+            mergeSort(mid + 1, high);
+            merge(low, high);
         }
     }
 
-    private static void mergeSort(int[] arr, int start, int end){
-       int mid;
+    public static void merge(int low, int high){
+        
+        int mid = low + (high - low) / 2;
+        int i = low;
+        int j = mid + 1;
+        int k = low;
 
-       if(start < end){
-           mid = (start + end) / 2;
-           mergeSort(arr, start, mid);
-           mergeSort(arr, mid + 1, end);
-           merge(arr, start, mid, end);
-       }
-    }
-
-    private static void merge(int[] arr, int start, int mid, int end){
-        int i, j, k ,q;
-
-        k = i = start;
-        q = j = mid + 1;
-
-        while(i <= mid && j <= end){
-            if(arr[i] >= arr[j]){
-                sortedArr[k++] = arr[j++];
+        while(i <= mid && j <= high){
+            if(arr[i] <= arr[j]){
+                sortedArr[k++] = arr[i++];
             }else{
-                sortedArr[k++] = arr[i++];
-            }
-        }
-
-        if(i > mid){
-            while(j <= end){
                 sortedArr[k++] = arr[j++];
             }
         }
-        if(j > end){
-            while(i <= mid){
+
+        if(i <= mid){
+            while(k <= high){
                 sortedArr[k++] = arr[i++];
+            }
+        }else{
+            while(k <= high){
+                sortedArr[k++] = arr[j++];
             }
         }
 
-        while(start <= end){
-            arr[start] = sortedArr[start++];
+        k--;
+
+        while(k >= low){
+            arr[k] = sortedArr[k];
+            k--;
         }
     }
 }
