@@ -21,6 +21,8 @@ public class Backjoon2636 {
     static boolean[][] check;
     static int[] rowArr = new int[]{-1, 0, 1, 0};
     static int[] colArr = new int[]{0, 1, 0, -1};
+    static boolean checkLast;
+    static int lastCnt;
 
     public static void main(String[] args) throws IOException{
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -41,6 +43,7 @@ public class Backjoon2636 {
         int result = solve();
 
         bw.write(result + "\n");
+        bw.write(lastCnt + "\n");
         bw.close();
         br.close();
 
@@ -60,7 +63,8 @@ public class Backjoon2636 {
                             
                             if(checkLoc(toRow, toCol) == true){
                                 if(bfs(toRow, toCol) == true){
-                                    graph[toRow][toCol] = 2;
+                                    graph[i][j] = 2;
+                                    break;
                                 }
                             }
                         }
@@ -71,6 +75,8 @@ public class Backjoon2636 {
 
             if(setGraph() == true) result++;
             else break;
+
+
 
         }
         return result;
@@ -116,14 +122,23 @@ public class Backjoon2636 {
     
     static boolean setGraph(){
         boolean result = false;
+        checkLast = true;
+        int cnt = 0;
 
         for(int i = 2; i < ROW; i++){
             for(int j = 2; j < COL; j++){
                 if(graph[i][j] == 2){
                     graph[i][j] = 0;
                     result = true;
+                    cnt++;
+                }else if(graph[i][j] == 1){
+                    checkLast = false;
                 }
             }
+        }
+
+        if(checkLast = true && cnt != 0){
+            lastCnt = cnt;
         }
         return result;
     }
