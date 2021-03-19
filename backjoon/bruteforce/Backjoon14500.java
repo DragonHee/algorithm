@@ -14,7 +14,6 @@ public class Backjoon14500 {
     static int[] colArr = new int[]{1,0,-1,0};
 
     public static void main(String[] arsgs) throws IOException{
-        int cnt = 0;
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(st.nextToken());
