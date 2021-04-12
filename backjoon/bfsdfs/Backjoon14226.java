@@ -1,4 +1,4 @@
-package backjoon;
+package backjoon.bfsdfs;
 
 import java.io.*;
 import java.util.*;
