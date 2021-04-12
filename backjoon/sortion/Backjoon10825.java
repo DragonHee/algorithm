@@ -15,8 +15,8 @@ class StudentScore implements Comparable{
     }
 
     @Override
+    // this객체의 값 > 파라미터 객체의 값 -> return 1 ---> 기본 차순
     public int compareTo(Object o) {
-        // TODO Auto-generated method stub
         int koScoreRes = this.koScore - ((StudentScore)o).koScore;
         int enScoreRes = this.enScore - ((StudentScore)o).enScore;
         int maScoreRes = this.maScore - ((StudentScore)o).maScore;
