@@ -21,7 +21,7 @@ public class Backjoon1963 {
 
             int answer = solve();
 
-            bw.write(answer + "\n");
+            bw.write(answer == -1 ? "Impossible" : answer + "\n");
         }
 
         bw.close();
@@ -84,6 +84,7 @@ public class Backjoon1963 {
             }
         }
 
+        if(num <= 1) return false;
         return true;
     }
 }
