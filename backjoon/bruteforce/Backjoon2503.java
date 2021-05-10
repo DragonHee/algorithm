@@ -14,9 +14,11 @@ public class Backjoon2503 {
 
         for(int i = 0; i < N; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
+
             int num = Integer.parseInt(st.nextToken());
             int strike = Integer.parseInt(st.nextToken());
             int ball = Integer.parseInt(st.nextToken());
+
             int numArr[] = new int[3];
 
             for(int j = 0 ; j < 3; j++){
@@ -24,6 +26,10 @@ public class Backjoon2503 {
             }
 
             for(int j = 100 ; j < 1000; j++){
+                // 2번째 검사부터는
+                // 이전 검사에서 실패한 경우 생략
+                if(i > 0 && arr[j] == false) continue;
+
                 boolean stopFlag = false;
                 int[] jArr = new int[3];
 
@@ -34,11 +40,8 @@ public class Backjoon2503 {
                 for(int k = 0 ; k < 3; k++){
                     if(jArr[k] == 0) {
                         stopFlag = true;
-                        break;
                     }
-                }
 
-                for(int k = 0 ; k < 3; k++){
                     for(int q = k + 1; q < 3; q++){
                         if(jArr[k] == jArr[q]){
                             stopFlag = true;
@@ -51,7 +54,6 @@ public class Backjoon2503 {
                 boolean[] check = new boolean[3];
                 int calcStrike = 0;
                 int calcBall = 0;
-
 
                 for(int k = 0 ; k < 3; k++){
                     if(numArr[k] == jArr[k]){
@@ -73,20 +75,17 @@ public class Backjoon2503 {
                 }
 
                 if(calcStrike == strike && calcBall == ball) {
-                    if(i == 0){
-                        arr[j] = true;
-                    }
+                    if(i == 0) arr[j] = true;
                 }
                 else{
-                    if(i > 0){
-                        if(arr[j] == true) arr[j] = false;
-                    }
+                    arr[j] = false;
                 }
             }
         }
+
         int answer = 0;
 
-        for(int i = 0; i < 1000; i++){
+        for(int i = 100; i < 1000; i++){
             if(arr[i] == true) answer++;
         }
 
@@ -94,5 +93,4 @@ public class Backjoon2503 {
         bw.close();
         br.close();
     }
-    
 }
