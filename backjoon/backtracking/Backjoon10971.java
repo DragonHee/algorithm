@@ -36,7 +36,9 @@ public class Backjoon10971 {
         boolean check[] = new boolean[N + 1];
 
         for(int i = 1; i <= N; i++){
+            check[i] = true;
             combination(i, i, 0, check, 0);
+            check[i] = false;
         }
     }
 
@@ -48,12 +50,11 @@ public class Backjoon10971 {
 
         if(count == N - 1){
             if(graph[curNode][startNode] != 0){
-                combination(startNode, curNode, count + 1, check, depth + graph[curNode][startNode]);
+                combination(startNode, startNode, count + 1, check, depth + graph[curNode][startNode]);
             }
         }
         else{
             for(int i = 1; i <= N; i++){
-                if(i == startNode) continue;
                 if(check[i] == true) continue;
                 if(graph[curNode][i] == 0) continue;
                 
@@ -62,7 +63,5 @@ public class Backjoon10971 {
                 check[i] = false;
             }
         }
-        
     }
-    
 }
