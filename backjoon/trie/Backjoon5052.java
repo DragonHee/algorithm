@@ -48,21 +48,29 @@ public class Backjoon5052 {
             getPhoneNum(phoneNumArr);
             // 입력받은 배열 길이 오름차순으로 정렬
             sortPhoneNumByLength(phoneNumArr);
+            // trie 자료구조 생성
+            // 생성 주 일관성이 없으면 false리턴
+            // 일관성이 있으면 true 리턴
+            boolean isConsistence = makeTrieByArray(phoneNumArr);
 
-            Node rootNode = new Node();
-            boolean res = false;
-
-            for(int j = 0 ; j < n; j++){
-                res = addTrie(phoneNumArr[j], rootNode);
-                if(res == false) break;
-            }
-           
-            if(res == false) bw.write("NO\n");
+            if(isConsistence == false) bw.write("NO\n");
             else bw.write("YES\n");
         }
 
         bw.close();
         br.close();
+    }
+
+    public static boolean makeTrieByArray(String[] phoneNumArr){
+        Node rootNode = new Node();
+        boolean res = false;
+
+        for(int j = 0 ; j < phoneNumArr.length; j++){
+            res = addTrie(phoneNumArr[j], rootNode);
+            if(res == false) break;
+        }
+
+        return res;
     }
 
     public static void sortPhoneNumByLength(String[] phoneNumArr){
