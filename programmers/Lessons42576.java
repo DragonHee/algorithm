@@ -1,22 +1,22 @@
 package programmers;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
-class Lessons42576 {
+public class Lessons42576 {
     public String solution(String[] participant, String[] completion) {
         String answer = "";
         
-        Arrays.sort(participant);
-        Arrays.sort(completion);
+        HashMap<String, Integer> hashMap = new HashMap<>();
         
-        for(int i = 0 ; i < participant.length - 1; i++){
-            if(!participant[i].equals(completion[i])){
-                answer = participant[i].toString();
+        for(String player : participant) hashMap.put(player, hashMap.getOrDefault(player, 0) + 1);
+        for(String player : completion) hashMap.put(player, hashMap.get(player) - 1);
+        
+        for(String key : hashMap.keySet()){
+            if(hashMap.get(key).equals(1)) {
+                answer = key.toString();
                 break;
             }
         }
-        
-        if(answer.equals("")) answer = participant[participant.length - 1].toString();
         
         return answer;
     }
