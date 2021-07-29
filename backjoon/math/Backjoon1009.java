@@ -1,35 +1,26 @@
 package backjoon.math;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Backjoon1009 {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    // a^b의 경우 
-    // a의 1의 자릿수에 따른 값을 배열에 초기화한다.
-    // static int[] arr0 = new int[]{0};
-    // static int[] arr1 = new int[]{1};
-    // static int[] arr2 = new int[]{2,4,8,6};
-    // static int[] arr3 = new int[]{3,9,7,1};
-    // static int[] arr4 = new int[]{4,6};
-    // static int[] arr5 = new int[]{5};
-    // static int[] arr6 = new int[]{6};
-    // static int[] arr7 = new int[]{7,9,3,1};
-    // static int[] arr8 = new int[]{8,4,2,6};
-    // static int[] arr9 = new int[]{9,1};
 
     public static void main(String[] args) throws IOException{
+        // testCase 갯수 입력
         int testCnt = Integer.parseInt(br.readLine());
 
         for(int i = 0 ; i < testCnt; i++){
+            // a, b 값 입력
             StringTokenizer st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
 
+            // 풀이 메소드 호출
             int answer = solve(a, b);
 
+            // 출력 버퍼 write
             bw.write(answer + "\n");
         }
 
@@ -40,31 +31,38 @@ public class Backjoon1009 {
     public static int solve(int a, int b){
         int result = 0;
 
+        // 입력받은 a의 1의 자릿수
         int calcA = a % 10;
+        // calcA * calcA * ... 을 저장할 변수
+        // 초기에는 calcA로 셋팅
         int value = calcA;
 
+        // a^b가 이루어질 때 1의 자릿수를 저장할 리스트
+        // ex) a = 3인 경우 list = {3, 9, 7, 1}
         ArrayList<Integer> list = new ArrayList<>();
+        // list에 중복된 값이 들어가지 않도록 체크할 배열
         boolean[] isCheck = new boolean[10];
-
 
         list.add(value);
         isCheck[value] = true;
 
         while(true){
+            // calcA를 곱해서 1의 자릿수만 확인
             value = (value * calcA) % 10;
             
+            // value가 이미 list에 들어있는 값이라면
+            // 앞으로 순환된 값이 들어오므로 break
             if(isCheck[value] == true) break;
 
             list.add(value);
             isCheck[value] = true;
         }
 
+        // (b - 1)을 해야 list의 index와 같아짐
         int calcB = (b - 1) % list.size();
+        // 0이면 10번째 컴퓨터임
         result = list.get(calcB) != 0 ? list.get(calcB) : 10;
 
         return result;
-    }
-    
-  
-    
+    }   
 }
