@@ -44,13 +44,6 @@ public class Backjoon11052 {
             }
         }
 
-        // for(int i = 0 ; i <= totalCardCnt; i++){
-        //     for(int j = 0 ; j <= totalCardCnt; j++){
-        //         System.out.print(dp[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
-
         return maxValue;
     }
 }
